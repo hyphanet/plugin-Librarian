@@ -146,7 +146,8 @@ public class Librarian implements FredPlugin, FredPluginHTTP {
 		
 		if (search.equals("")) {
 			appendDefaultPageStart(out);
-			appendDefaultPostFields(out);
+			//appendDefaultPostFields(out);
+			appendDefaultPostFields(out, search, indexuri);
 			appendDefaultPageEnd(out);
 			return out.toString();
 		}
@@ -170,13 +171,13 @@ public class Librarian implements FredPlugin, FredPluginHTTP {
 			HashMap index = getFullIndex(indexuri);
 			
 			appendDefaultPageStart(out);
-			appendDefaultPostFields(out, search.replaceAll("\\+", " "), indexuri);
+			appendDefaultPostFields(out, search, indexuri);
 
-			out.append("Searching for: " + search.replaceAll("\\+", " ") + "\n");
+			out.append("Searching for: " + search + "\n");
 
 			//String searchWords[] = search.replaceAll("%20", "+").split("+");
 			// Get search result
-			String searchWords[] = search.split("\\+");
+			String searchWords[] = search.split(" ");
 			
 			HashSet hs = new HashSet();
 			{ // add all for the first word
@@ -203,9 +204,14 @@ public class Librarian implements FredPlugin, FredPluginHTTP {
 			out.append("<table><tr>\n");
 			Iterator it = hs.iterator();
 			while (it.hasNext()) {
+				
 				URIWrapper o = (URIWrapper)it.next();
-				out.append("<table border=1><tr><td align=center bgcolor=\"#D0D0D0\">\n");
-				out.append("  <A HREF=\"/" + o.URI + "\">" + o.URI + "</A>\n");
+				String showurl = o.URI;
+				if (showurl.length() > 60)
+					showurl = showurl.substring(0,10) + "..." + 
+					showurl.substring(showurl.length()-45);
+				out.append("<table width=\"100%\" border=1><tr><td align=center bgcolor=\"#D0D0D0\">\n");
+				out.append("  <A HREF=\"/" + o.URI + "\" title=\""+o.URI+"\">" + showurl + "</A>\n");
 				out.append("</td></tr><tr><td align=left>\n");
 				out.append("<pre>" + o.descr + "</pre>\n");
 				out.append("</td></tr></table>\n");
