@@ -180,7 +180,7 @@ public class Librarian implements FredPlugin, FredPluginHTTP {
 			String searchWords[] = search.split(" ");
 			
 			HashSet hs = new HashSet();
-			{ // add all for the first word
+			synchronized (hs) { // add all for the first word
 				HashSet keyuris = (HashSet)index.get(searchWords[0].toLowerCase().trim());
 				if (keyuris != null) {
 					Iterator it = keyuris.iterator();
@@ -188,16 +188,17 @@ public class Librarian implements FredPlugin, FredPluginHTTP {
 						hs.add(it.next());
 				}
 			}
-			for (int i = 0 ; i < searchWords.length ; i++) {
-				HashSet keyuris = (HashSet)index.get(searchWords[i].toLowerCase().trim());
-				Iterator it = hs.iterator();
-				while (it.hasNext()) {
-					Object o = it.next();
-					if (!keyuris.contains(o))
-						hs.remove(o);
+			synchronized (hs) {
+				for (int i = 0 ; i < searchWords.length ; i++) {
+					HashSet keyuris = (HashSet)index.get(searchWords[i].toLowerCase().trim());
+					Iterator it = hs.iterator();
+					while (it.hasNext()) {
+						Object o = it.next();
+						if (!keyuris.contains(o))
+							hs.remove(o);
+					}
 				}
 			}
-			
 
 			// Output results
 			int results = 0;
@@ -211,7 +212,7 @@ public class Librarian implements FredPlugin, FredPluginHTTP {
 					showurl = showurl.substring(0,10) + "..." + 
 					showurl.substring(showurl.length()-45);
 				out.append("<table width=\"100%\" border=1><tr><td align=center bgcolor=\"#D0D0D0\">\n");
-				out.append("  <A HREF=\"/" + o.URI + "\" title=\""+o.URI+"\">" + showurl + "</A>\n");
+				out.append("  <A HREF=\"" + (o.URI.startsWith("/")?"":"/") + o.URI + "\" title=\""+o.URI+"\">" + showurl + "</A>\n");
 				out.append("</td></tr><tr><td align=left>\n");
 				out.append("<pre>" + o.descr + "</pre>\n");
 				out.append("</td></tr></table>\n");
