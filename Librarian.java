@@ -15,7 +15,7 @@ import freenet.client.FetchResult;
 import freenet.client.HighLevelSimpleClient;
 import freenet.keys.FreenetURI;
 
-public class Librarian implements FredPlugin, FredPluginHTTP {
+public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadless {
 	
 	private static final String DEFAULT_INDEX_URI = "CHK@tTwGfSxsZhVGDGL3iEsO2LxlvCLJMf8j1tlNqe5ecA0,-nGoC64OO4QCsKDHYNV~XjS1CylZ8u2A~WbZ0vCZtJs,AAEC--8";
 	
