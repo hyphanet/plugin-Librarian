@@ -1,18 +1,14 @@
 package plugins;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.Vector;
 
-import freenet.node.Node;
 import freenet.pluginmanager.*;
-import freenet.client.FetchException;
-import freenet.client.FetchResult;
 import freenet.client.HighLevelSimpleClient;
+import freenet.clients.http.HTTPRequest;
 import freenet.keys.FreenetURI;
 
 public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadless {
