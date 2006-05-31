@@ -14,7 +14,7 @@ import freenet.keys.FreenetURI;
 public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadless {
 	
 	//private static final String DEFAULT_INDEX_URI = "CHK@tTwGfSxsZhVGDGL3iEsO2LxlvCLJMf8j1tlNqe5ecA0,-nGoC64OO4QCsKDHYNV~XjS1CylZ8u2A~WbZ0vCZtJs,AAEC--8";
-	private static final String DEFAULT_INDEX_URI = "CHK@Zs6lgZhD9Sx35wujFJDTsVIgihiYPO3uqMcD1aqtWY4,mwZZxdPB8S1n5~8oz2LLFHkLKshvPV19v1et4KfX2R8,AAEC--8";
+	private static final String DEFAULT_INDEX_URI = "CHK@u5yUWafV5G4cFz6u5myqnxN1MzDU08NXpkAEh7lOVSQ,SwOlTb-iydgeQ3rv0WXg7fBfXL68vHI~B26i2Rbh4dE,AAEC--8";
 	
 	boolean goon = true;
 	Random rnd = new Random();
