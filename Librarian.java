@@ -13,8 +13,7 @@ import freenet.keys.FreenetURI;
 
 public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadless {
 	
-	//private static final String DEFAULT_INDEX_URI = "CHK@tTwGfSxsZhVGDGL3iEsO2LxlvCLJMf8j1tlNqe5ecA0,-nGoC64OO4QCsKDHYNV~XjS1CylZ8u2A~WbZ0vCZtJs,AAEC--8";
-	private static final String DEFAULT_INDEX_URI = "CHK@u5yUWafV5G4cFz6u5myqnxN1MzDU08NXpkAEh7lOVSQ,SwOlTb-iydgeQ3rv0WXg7fBfXL68vHI~B26i2Rbh4dE,AAEC--8";
+	private static final String DEFAULT_INDEX_URI = "CHK@ebXD98DhtAdeU2OH~LH8K~NMobekuTlFeosrx6ViImA,g0gbLO0eUg0IFdoH1~4vnAdrfUyKt7-2jI3OB4scwyM,AAEC--8";
 	
 	boolean goon = true;
 	Random rnd = new Random();
