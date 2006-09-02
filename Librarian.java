@@ -1,4 +1,4 @@
-package plugins;
+package plugins.Librarian;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -6,10 +6,14 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.Vector;
 
-import freenet.pluginmanager.*;
 import freenet.client.HighLevelSimpleClient;
 import freenet.clients.http.HTTPRequest;
 import freenet.keys.FreenetURI;
+import freenet.pluginmanager.FredPlugin;
+import freenet.pluginmanager.FredPluginHTTP;
+import freenet.pluginmanager.FredPluginThreadless;
+import freenet.pluginmanager.PluginHTTPException;
+import freenet.pluginmanager.PluginRespirator;
 
 public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadless {
 	
