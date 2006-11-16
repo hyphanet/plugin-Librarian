@@ -78,10 +78,9 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 	
 	private void appendDefaultPostFields(StringBuffer out, String search, String index) {
 		out.append("Search for:<br/>");
-		out.append("<form method=\"GET\"><input type=text value=\""+search
-				+"\" name=\"search\" size=80/><br/><br/>");
+        out.append("<form method=\"GET\"><input type=text value=\"").append(search).append("\" name=\"search\" size=80/><br/><br/>");
 		out.append("Using the index:<br/>");
-		out.append("<input type=text name=\"index\" value=\"" + index + "\" size=80/>");
+        out.append("<input type=text name=\"index\" value=\"").append(index).append("\" size=80/>");
 		out.append("<input type=submit value=\"Find!\"/></form>\n");
 		// index - key to index
 		// search - text to search for
@@ -108,7 +107,7 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 				if (uriw.descr==null)
 					uriw.descr = index[i].substring(1);
 				else
-					uriw.descr += "\n"+ index[i].substring(1);
+					uriw.descr += '\n' + index[i].substring(1);
 			} else
 				break;
 			
@@ -167,7 +166,7 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 			appendDefaultPageStart(out);
 			appendDefaultPostFields(out, search, indexuri);
 
-			out.append("Searching for: " + search + "\n");
+            out.append("Searching for: ").append(search).append('\n');
 
 			//String searchWords[] = search.replaceAll("%20", "+").split("+");
 			// Get search result
@@ -207,14 +206,14 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 					showurl = showurl.substring(0,10) + "..." + 
 					showurl.substring(showurl.length()-45);
 				out.append("<table width=\"100%\" border=1><tr><td align=center bgcolor=\"#D0D0D0\">\n");
-				out.append("  <A HREF=\"" + (o.URI.startsWith("/")?"":"/") + o.URI + "\" title=\""+o.URI+"\">" + showurl + "</A>\n");
+                out.append("  <A HREF=\"").append(o.URI.startsWith("/") ? "" : "/").append(o.URI).append("\" title=\"").append(o.URI).append("\">").append(showurl).append("</A>\n");
 				out.append("</td></tr><tr><td align=left>\n");
-				out.append("<pre>" + o.descr + "</pre>\n");
+                out.append("<pre>").append(o.descr).append("</pre>\n");
 				out.append("</td></tr></table>\n");
 				results++;
 			}
 			out.append("</tr><table>\n");
-			out.append("Found: " + results + " results\n");
+            out.append("Found: ").append(results).append(" results\n");
 			
 
 			appendDefaultPageEnd(out);
