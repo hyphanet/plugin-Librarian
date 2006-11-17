@@ -14,6 +14,7 @@ import freenet.pluginmanager.FredPluginHTTP;
 import freenet.pluginmanager.FredPluginThreadless;
 import freenet.pluginmanager.PluginHTTPException;
 import freenet.pluginmanager.PluginRespirator;
+import freenet.support.HTMLEncoder;
 
 public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadless {
 	
@@ -77,6 +78,8 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 	}
 	
 	private void appendDefaultPostFields(StringBuffer out, String search, String index) {
+		search = HTMLEncoder.encode(search);
+		index = HTMLEncoder.encode(index);
 		out.append("Search for:<br/>");
         out.append("<form method=\"GET\"><input type=text value=\"").append(search).append("\" name=\"search\" size=80/><br/><br/>");
 		out.append("Using the index:<br/>");
@@ -166,7 +169,7 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 			appendDefaultPageStart(out);
 			appendDefaultPostFields(out, search, indexuri);
 
-            out.append("Searching for: ").append(search).append('\n');
+			out.append("Searching for: ").append(HTMLEncoder.encode(search)).append('\n');
 
 			//String searchWords[] = search.replaceAll("%20", "+").split("+");
 			// Get search result
@@ -205,10 +208,13 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 				if (showurl.length() > 60)
 					showurl = showurl.substring(0,10) + "..." + 
 					showurl.substring(showurl.length()-45);
+				String realurl = (o.URI.startsWith("/")?"":"/") + o.URI;
+				realurl = HTMLEncoder.encode(realurl);
+				showurl = HTMLEncoder.encode(showurl);
 				out.append("<table width=\"100%\" border=1><tr><td align=center bgcolor=\"#D0D0D0\">\n");
-                out.append("  <A HREF=\"").append(o.URI.startsWith("/") ? "" : "/").append(o.URI).append("\" title=\"").append(o.URI).append("\">").append(showurl).append("</A>\n");
+				out.append("  <A HREF=\"").append(realurl).append("\" title=\"").append(o.URI).append("\">").append(showurl).append("</A>\n");
 				out.append("</td></tr><tr><td align=left>\n");
-                out.append("<pre>").append(o.descr).append("</pre>\n");
+				out.append("<pre>").append(HTMLEncoder.encode(o.descr)).append("</pre>\n");
 				out.append("</td></tr></table>\n");
 				results++;
 			}
