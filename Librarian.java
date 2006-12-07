@@ -11,6 +11,8 @@ import freenet.client.FetchException;
 import freenet.client.FetchResult;
 import freenet.client.HighLevelSimpleClient;
 import freenet.clients.http.HTTPRequest;
+import freenet.clients.http.filter.CommentException;
+import freenet.clients.http.filter.FilterCallback;
 import freenet.keys.FreenetURI;
 import freenet.pluginmanager.FredPlugin;
 import freenet.pluginmanager.FredPluginHTTP;
@@ -67,8 +69,11 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 		return ret;
 	}
 	
-	private void appendDefaultPageStart(StringBuffer out) {
-		out.append("<HTML><HEAD><TITLE>" + plugName + "</TITLE></HEAD><BODY>\n");
+	private void appendDefaultPageStart(StringBuffer out, String stylesheet) {
+		out.append("<HTML><HEAD><TITLE>" + plugName + "</TITLE>");
+		if(stylesheet != null)
+			out.append("<link href=\""+stylesheet+"\" type=\"text/css\" rel=\"stylesheet\" />");
+		out.append("</HEAD><BODY>\n");
 		out.append("<CENTER><H1>" + plugName + "</H1><BR/><BR/><BR/>\n");
 	}
 
@@ -161,9 +166,18 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 		//int page = request.getIntParam("page", 1);
 		String indexuri = request.getParam("index", DEFAULT_INDEX_URI);
 		String search = request.getParam("search");
+		String stylesheet = request.getParam("stylesheet");
+		if(stylesheet != null) {
+			FilterCallback cb = pr.makeFilterCallback(request.getPath());
+			try {
+				stylesheet = cb.processURI(stylesheet, "text/css");
+			} catch (CommentException e) {
+				return "Invalid stylesheet";
+			}
+		}
 		
 		if (search.equals("")) {
-			appendDefaultPageStart(out);
+			appendDefaultPageStart(out, stylesheet);
 			//appendDefaultPostFields(out);
 			appendDefaultPostFields(out, search, indexuri);
 			appendDefaultPageEnd(out);
@@ -188,7 +202,7 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 			
 			HashMap index = getFullIndex(indexuri);
 			
-			appendDefaultPageStart(out);
+			appendDefaultPageStart(out, stylesheet);
 			appendDefaultPostFields(out, search, indexuri);
 
 			out.append("<p><span class=\"librarian.searching-for.header\">Searching for: </span><span class=\"librarian.searching-for.target\">").append(HTMLEncoder.encode(search)).append("</span></p>\n");
