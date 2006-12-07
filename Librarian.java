@@ -120,10 +120,16 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 			if (!index[i].startsWith("?"))
 				break;
 			String parts[] = index[i].split(" ");
-			HashSet keyuris = new HashSet();
+			Vector keyuris = new Vector();
 			//System.err.println(":::" +  + ":::");
 			for (int j = 1 ; j < parts.length ; j++) {
-				keyuris.add(uris.get(Integer.parseInt(parts[j])));
+				int uriNumber = Integer.parseInt(parts[j]);
+				URIWrapper uw = (URIWrapper) uris.get(uriNumber);
+				// Yes I know this is O(n), but there shouldn't be that many hits for a single word.
+				// FIXME If there are, use a LinkedHashSet (note that this will cost far more memory).
+				// Don't use a plain HashSet, because we want the results returned IN ORDER.
+				if(!keyuris.contains(uw))
+					keyuris.add(uw);
 				//System.err.println();
 			}
 			
