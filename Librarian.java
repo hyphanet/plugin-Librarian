@@ -3,6 +3,7 @@ package plugins.Librarian;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Random;
 import java.util.Vector;
 
@@ -196,7 +197,8 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 			// Get search result
 			String searchWords[] = search.split(" ");
 			
-			HashSet hs = new HashSet();
+			// Return results in order.
+			LinkedHashSet hs = new LinkedHashSet();
 			synchronized (hs) { // add all for the first word
 				Vector keyuris = (Vector)index.get(searchWords[0].toLowerCase().trim());
 				if (keyuris != null) {
