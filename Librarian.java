@@ -191,7 +191,7 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 			appendDefaultPageStart(out);
 			appendDefaultPostFields(out, search, indexuri);
 
-			out.append("<p><span class=\"librarian.searching-for.header>Searching for: </span><span class=\"librarian.searching-for.target\">").append(HTMLEncoder.encode(search)).append("</span></p>\n");
+			out.append("<p><span class=\"librarian.searching-for.header\">Searching for: </span><span class=\"librarian.searching-for.target\">").append(HTMLEncoder.encode(search)).append("</span></p>\n");
 
 			//String searchWords[] = search.replaceAll("%20", "+").split("+");
 			// Get search result
