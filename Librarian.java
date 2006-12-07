@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.Vector;
 
+import freenet.client.FetchException;
+import freenet.client.FetchResult;
 import freenet.client.HighLevelSimpleClient;
 import freenet.clients.http.HTTPRequest;
 import freenet.keys.FreenetURI;
@@ -81,7 +83,7 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 		search = HTMLEncoder.encode(search);
 		index = HTMLEncoder.encode(index);
 		out.append("Search for:<br/>");
-        out.append("<form method=\"GET\"><input type=text value=\"").append(search).append("\" name=\"search\" size=80/><br/><br/>");
+        out.append("<form method=\"GET\"><input type=\"text\" value=\"").append(search).append("\" name=\"search\" size=80/><br/><br/>");
 		out.append("Using the index:<br/>");
         out.append("<input type=text name=\"index\" value=\"").append(index).append("\" size=80/>");
 		out.append("<input type=submit value=\"Find!\"/></form>\n");
@@ -92,7 +94,18 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 	
 	private HashMap getFullIndex(String uri) throws Exception {
 		HighLevelSimpleClient hlsc = pr.getHLSimpleClient();
-		String index[] = new String(hlsc.fetch(new FreenetURI(uri)).asByteArray()).trim().split("\n");
+		FreenetURI u = new FreenetURI(uri);
+		FetchResult res;
+		while(true) {
+			try {
+				res = hlsc.fetch(u);
+				break;
+			} catch (FetchException e) {
+				if(e.newURI != null)
+					u = e.newURI;
+			}
+		}
+		String index[] = new String(res.asByteArray()).trim().split("\n");
 		
 		Vector uris = new Vector();
 		HashMap keywords = new HashMap();
@@ -192,7 +205,7 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 			}
 			synchronized (hs) {
 				for (int i = 0 ; i < searchWords.length ; i++) {
-					HashSet keyuris = (HashSet)index.get(searchWords[i].toLowerCase().trim());
+					Vector keyuris = (Vector)index.get(searchWords[i].toLowerCase().trim());
 					
 					Iterator it = hs.iterator();
 					while (it.hasNext()) {
