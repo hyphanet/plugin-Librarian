@@ -18,7 +18,7 @@ import freenet.support.HTMLEncoder;
 
 public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadless {
 	
-	private static final String DEFAULT_INDEX_URI = "USK@cDLoaVgM9C2VVM45y0ySGuPOGPZ9HC62fXJitrWKrIk,gEVxI7CId5NfH8ANWoUZ3NzNJg-QrN5SHKtoYP~G6y0,AQABAAE/LibrarianIndex/1";
+	private static final String DEFAULT_INDEX_URI = "USK@RG18X0wfOZrQ-5axO~45moiclaFtqT7ANllg165Zjpg,qTu5gqJLwC5LYyomwTUQWPergIEa3WZIPPd5qd~R5Nk,AQABAAE/ENTRY.POINT/48/librarian.idx";
 	
 	boolean goon = true;
 	Random rnd = new Random();
