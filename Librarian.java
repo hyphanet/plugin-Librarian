@@ -305,4 +305,3 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 	}
 
 }
-
