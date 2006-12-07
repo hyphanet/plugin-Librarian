@@ -101,8 +101,10 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 				res = hlsc.fetch(u);
 				break;
 			} catch (FetchException e) {
-				if(e.newURI != null)
+				if(e.newURI != null) {
 					u = e.newURI;
+					continue;
+				} else throw e;
 			}
 		}
 		String index[] = new String(res.asByteArray()).trim().split("\n");
