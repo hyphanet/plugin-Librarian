@@ -198,7 +198,7 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 			
 			HashSet hs = new HashSet();
 			synchronized (hs) { // add all for the first word
-				HashSet keyuris = (HashSet)index.get(searchWords[0].toLowerCase().trim());
+				Vector keyuris = (Vector)index.get(searchWords[0].toLowerCase().trim());
 				if (keyuris != null) {
 					Iterator it = keyuris.iterator();
 					while (it.hasNext())
@@ -206,7 +206,7 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 				}
 			}
 			synchronized (hs) {
-				for (int i = 0 ; i < searchWords.length ; i++) {
+				for (int i = 1 ; i < searchWords.length ; i++) {
 					Vector keyuris = (Vector)index.get(searchWords[i].toLowerCase().trim());
 					
 					Iterator it = hs.iterator();
