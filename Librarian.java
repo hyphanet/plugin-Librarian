@@ -190,7 +190,7 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 			appendDefaultPageStart(out);
 			appendDefaultPostFields(out, search, indexuri);
 
-			out.append("Searching for: ").append(HTMLEncoder.encode(search)).append('\n');
+			out.append("<p><span class=\"librarian.searching-for.header>Searching for: </span><span class=\"librarian.searching-for.target\">").append(HTMLEncoder.encode(search)).append("</span></p>\n");
 
 			//String searchWords[] = search.replaceAll("%20", "+").split("+");
 			// Get search result
@@ -220,7 +220,7 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 
 			// Output results
 			int results = 0;
-			out.append("<table><tr>\n");
+			out.append("<table class=\"librarian.results\"><tr>\n");
 			Iterator it = hs.iterator();
 			while (it.hasNext()) {
 				
@@ -232,15 +232,15 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 				String realurl = (o.URI.startsWith("/")?"":"/") + o.URI;
 				realurl = HTMLEncoder.encode(realurl);
 				showurl = HTMLEncoder.encode(showurl);
-				out.append("<table width=\"100%\" border=1><tr><td align=center bgcolor=\"#D0D0D0\">\n");
+				out.append("<table class=\"librarian.result\" width=\"100%\" border=1><tr><td align=center bgcolor=\"#D0D0D0\" class=\"librarian.result.url\">\n");
 				out.append("  <A HREF=\"").append(realurl).append("\" title=\"").append(o.URI).append("\">").append(showurl).append("</A>\n");
-				out.append("</td></tr><tr><td align=left>\n");
+				out.append("</td></tr><tr><td align=left class=\"librarian.result.summary\">\n");
 				out.append("<pre>").append(HTMLEncoder.encode(o.descr)).append("</pre>\n");
 				out.append("</td></tr></table>\n");
 				results++;
 			}
 			out.append("</tr><table>\n");
-            out.append("Found: ").append(results).append(" results\n");
+            out.append("<p><span class=\"librarian.summary.found-text\">Found: </span><span class=\"librarian.summary.found-number\">").append(results).append(" results</span></p>\n");
 			
 
 			appendDefaultPageEnd(out);
