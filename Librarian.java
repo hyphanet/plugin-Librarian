@@ -166,13 +166,13 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 		//int page = request.getIntParam("page", 1);
 		String indexuri = request.getParam("index", DEFAULT_INDEX_URI);
 		String search = request.getParam("search");
-		String stylesheet = request.getParam("stylesheet");
+		String stylesheet = request.getParam("stylesheet", null);
 		if(stylesheet != null) {
 			FilterCallback cb = pr.makeFilterCallback(request.getPath());
 			try {
 				stylesheet = cb.processURI(stylesheet, "text/css");
 			} catch (CommentException e) {
-				return "Invalid stylesheet";
+				return "Invalid stylesheet: "+e.getMessage();
 			}
 		}
 		
