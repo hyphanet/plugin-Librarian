@@ -10,7 +10,6 @@ import java.util.Vector;
 import freenet.client.FetchException;
 import freenet.client.FetchResult;
 import freenet.client.HighLevelSimpleClient;
-import freenet.clients.http.HTTPRequest;
 import freenet.clients.http.filter.CommentException;
 import freenet.clients.http.filter.FilterCallback;
 import freenet.keys.FreenetURI;
@@ -20,6 +19,7 @@ import freenet.pluginmanager.FredPluginThreadless;
 import freenet.pluginmanager.PluginHTTPException;
 import freenet.pluginmanager.PluginRespirator;
 import freenet.support.HTMLEncoder;
+import freenet.support.api.HTTPRequest;
 
 public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadless {
 	
