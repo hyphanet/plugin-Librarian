@@ -22,7 +22,7 @@ import freenet.support.api.HTTPRequest;
 
 public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadless {
 	
-	private static final String DEFAULT_INDEX_URI = "USK@RG18X0wfOZrQ-5axO~45moiclaFtqT7ANllg165Zjpg,qTu5gqJLwC5LYyomwTUQWPergIEa3WZIPPd5qd~R5Nk,AQABAAE/ENTRY.POINT/48/librarian.idx";
+	private static final String DEFAULT_INDEX_URI = "USK@7H66rhYmxIFgMyw5Dl11JazXGHPhp7dSN7WMa1pbtEo,jQHUQUPTkeRcjmjgrc7t5cDRdDkK3uKkrSzuw5CO9uk,AQACAAE/ENTRY.POINT/1/librarian.idx";
 	
 	boolean goon = true;
 	Random rnd = new Random();
