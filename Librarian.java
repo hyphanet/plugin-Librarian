@@ -241,16 +241,20 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 				
 				URIWrapper o = (URIWrapper)it.next();
 				String showurl = o.URI;
+				String description = HTMLEncoder.encode(o.descr);
+				description=description.replaceAll("(\n|&lt;(b|B)(r|R)&gt;)", "<br>");
+				description=description.replaceAll("  ", "&nbsp; ");
+				description=description.replaceAll("&lt;/?[a-zA-Z].*/?&gt;", "");
+				showurl = HTMLEncoder.encode(showurl);
 				if (showurl.length() > 60)
-					showurl = showurl.substring(0,10) + "..." + 
-					showurl.substring(showurl.length()-45);
+					showurl = showurl.substring(0,15) + "&hellip;" + 
+					    showurl.replaceFirst("[^/]*/", "/");
 				String realurl = (o.URI.startsWith("/")?"":"/") + o.URI;
 				realurl = HTMLEncoder.encode(realurl);
-				showurl = HTMLEncoder.encode(showurl);
-				out.append("<table class=\"librarian-result\" width=\"100%\" border=1><tr><td align=center bgcolor=\"#D0D0D0\" class=\"librarian-result-url\">\n");
+				out.append("<p>\n<table class=\"librarian-result\" width=\"100%\" border=1><tr><td align=center bgcolor=\"#D0D0D0\" class=\"librarian-result-url\">\n");
 				out.append("  <A HREF=\"").append(realurl).append("\" title=\"").append(o.URI).append("\">").append(showurl).append("</A>\n");
 				out.append("</td></tr><tr><td align=left class=\"librarian-result-summary\">\n");
-				out.append("<pre>").append(HTMLEncoder.encode(o.descr)).append("</pre>\n");
+				out.append("<tt>").append(description).append("</tt>\n");
 				out.append("</td></tr></table>\n");
 				results++;
 			}
