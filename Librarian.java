@@ -42,10 +42,10 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 		}
 	}
 	public String handleHTTPPut(HTTPRequest request) throws PluginHTTPException {
-		throw new PluginHTTPException("PUT requests aren't allowed!", "/plugins");
+		return null;
 	}
 	public String handleHTTPPost(HTTPRequest request) throws PluginHTTPException {
-		throw new PluginHTTPException("POST requests aren't allowed!", "/plugins");
+		return null;
 	}
 	
 	private HashMap getElements(String path) {
