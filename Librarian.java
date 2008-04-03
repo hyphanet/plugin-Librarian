@@ -24,7 +24,7 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 	
 	private static final String DEFAULT_INDEX_URI = "USK@7H66rhYmxIFgMyw5Dl11JazXGHPhp7dSN7WMa1pbtEo,jQHUQUPTkeRcjmjgrc7t5cDRdDkK3uKkrSzuw5CO9uk,AQACAAE/ENTRY.POINT/11/librarian.idx";
 	
-	boolean goon = true;
+	private volatile boolean goon = true;
 	Random rnd = new Random();
 	PluginRespirator pr;
 	private static final String plugName = "Librarian";
