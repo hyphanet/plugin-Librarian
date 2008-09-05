@@ -40,7 +40,7 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 		return null;
 	}
 	
-	private void appendDefaultPageStart(StringBuffer out, String stylesheet) {
+	private void appendDefaultPageStart(StringBuilder out, String stylesheet) {
 		out.append("<HTML><HEAD><TITLE>" + plugName + "</TITLE>");
 		if(stylesheet != null)
 			out.append("<link href=\""+stylesheet+"\" type=\"text/css\" rel=\"stylesheet\" />");
@@ -48,11 +48,11 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 		out.append("<CENTER><H1>" + plugName + "</H1><BR/><BR/><BR/>\n");
 	}
 
-	private void appendDefaultPageEnd(StringBuffer out) {
+	private void appendDefaultPageEnd(StringBuilder out) {
 		out.append("</CENTER></BODY></HTML>");
 	}
 
-	private void appendDefaultPostFields(StringBuffer out, String search, String index) {
+	private void appendDefaultPostFields(StringBuilder out, String search, String index) {
 		search = HTMLEncoder.encode(search);
 		index = HTMLEncoder.encode(index);
 		out.append("Search for:<br/>");
@@ -128,7 +128,7 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 	}
 	
 	public String handleHTTPGet(HTTPRequest request) throws PluginHTTPException {
-		StringBuffer out = new StringBuffer();
+		StringBuilder out = new StringBuilder();
 
 		//int page = request.getIntParam("page", 1);
 		String indexuri = request.getParam("index", DEFAULT_INDEX_URI);
