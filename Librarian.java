@@ -33,9 +33,6 @@ public class Librarian implements FredPlugin, FredPluginHTTP, FredPluginThreadle
 		goon = false;
 	}
 	
-	public String handleHTTPPut(HTTPRequest request) throws PluginHTTPException {
-		return null;
-	}
 	public String handleHTTPPost(HTTPRequest request) throws PluginHTTPException {
 		return null;
 	}
